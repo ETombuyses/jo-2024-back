@@ -86,11 +86,26 @@ foreach($sport_facilities_json as $sport_facility) {
     }
 }
 
+$special_char = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+    'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
+    'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
+    'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
+    'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', ' ' => '-', "'" => '-', ',' => '');
+
 
 foreach($sport_practises as $practise) {
+    $image_name = $practise['name'];
 
-   // TODO : image name script !!!
-    $image_name = 'toto';
+    if (strpos($image_name, "/")) {
+        $image_name = substr($image_name, 0, strpos($image_name, "/"));
+    }
+    if (strpos($image_name, "(")) {
+        $image_name = substr($image_name, 0, strpos($image_name, "("));
+    }
+    $image_name = trim($image_name);
+    $image_name = strtr( $image_name, $special_char);
+    $image_name = strtolower($image_name);
+
 
 
     $request = $pdo->prepare('INSERT INTO pratique_sportive(id, pratique, image_nom) VALUES (
@@ -240,7 +255,9 @@ foreach($sport_families_json as $sport) {
 
 foreach ($olympics_json as $olympic_event) {
 
-    $image = 'toto';
+
+    $image = strtr( $olympic_event['sportfamily'], $special_char);
+    $image = strtolower($image);
 
     $request = $pdo->prepare('SELECT id FROM categorie_sport WHERE sport_name = :olympic_event');
     $request->bindParam(':olympic_event', $olympic_event['sportfamily']);
