@@ -1,0 +1,115 @@
+[
+  {
+    "sport": "Athlétisme",
+    "practices": ["Course sur piste", "Lancer", "Javelot Tir sur cible", "Saut", "Saut d'obstacle"]
+  },
+  {
+    "sport": "Lancer",
+    "practices": ["Lancer", "Javelot Tir sur cible"]
+  },
+  {
+  "sport": "Sports aquatiques",
+  "practices": ["Aquagym", "Plongeon", "Natation synchronisée", "Natation course sportive", "Water-Polo", "Baignade loisirs", "Nage avec palmes", "Hockey subaquatique", "Plongée subaquatique (Plongée libre)"]
+  },
+
+  {
+    "sport": "Cyclisme",
+    "practices": ["Bicross (BMX)", "Cyclisme sur piste", "Cyclisme en salle"]
+  },
+  {
+  "sport": "Triathlon",
+  "practices": ["Natation course sportive", "Course et marche sur route (hors stade)", "Cyclisme en salle", "Cyclisme sur piste", "Course sur piste"]
+  },
+  {
+    "sport": "Course et marche",
+    "practices": ["Course sur piste", "Course et marche sur route (hors stade)", "Course en ligne", "Randonnée pédestre"]
+  },
+  {
+  "sport": "Sports d'épée",
+  "practices": ["Kendo / Iaïdo / Naginata / Jodo / Sport chanbara", "Escrime (Epée / Fleuret / Sabre )"]
+  },
+  {
+    "sport": "Sports de raquettes",
+    "practices": ["Badminton, Jeu de volant", "Tennis", "Squash", "Tennis de table"]
+  },
+  {
+    "sport": "Pentatlhon",
+    "practices": ["Natation course sportive", "Escrime (Epée / Fleuret / Sabre )", "Equitation", "Tir aux armes réglementaires", "Course sur piste", "Course et marche sur route (hors stade)"]
+  },
+  {
+    "sport": "Sports de ballon",
+    "practices": ["Basket-Ball", "Rugby à 15 / Rugby à 7", "Rugby à 13 / Rugby à 7", "Volley-ball / Volley-ball de plage (beach-volley) / Green-Volley", "Water-Polo", "Handball / Mini hand / Handball de plage", "Ballon au poing", "Football / Football en salle (Futsal)", "Football Américain / Flag"]
+  },
+  {
+    "sport": "Gymnastique",
+    "practices": ["Gymnastique Rythmique", "Bâton", "Double dutch", "Twirling bâton", "Gymnastique Artistique", "Expression gymnique", "Trampoline / Double mini-tramp", "Activités de forme et de santé", "Gymnastique Acrobatique", "Gymnastique volontaire"]
+  },
+  {
+    "sport": "Sports de balle",
+    "practices": ["Baseball", "Squash", "Tennis", "Cesta punta/Mains nues/Pala/Chistera (grande, joko garbi)/Paleta/Xare/Frontenis/Pala corta/Rebot", "Tennis de table", "Golf", "Crocket", "Cricket", "Hockey en salle / Hockey sur gazon"]
+  },
+  {
+    "sport": "Equitation",
+    "practices": ["Polo", "Equitation", "Horse - Ball"]
+  },
+  {
+    "sport": "Sports de tir",
+    "practices": ["Tir à l'arc", "Tir aux armes réglementaires", "Arbalète / Armes anciennes / Bench rest / Silhouettes métalliques / Tir sportif de vitesse"]
+  },
+  {
+    "sport": "Sports de combat",
+    "practices": ["Boxe Anglaise", "Boxe Américaine", "Boxe thaïlandaise Muay Thaï", "Boxe française savate", "Full contact (boxe américaine)/Light contact/First full/Full défense/Super fight/Semi-contact", "Kick boxing / Cardio KB / Kick boxing light / KB Défense", "Lutte traditionnelle / olympique libre / olympique gréco-romaine /  bretonne / féminine", "Sambo", "Sumo"]
+  },
+  {
+    "sport": "Arts martiaux",
+    "practices": ["Judo / Jujitsu / Taïso", "Karaté/Karaté jutsu/Goshin jutsu/Kobudo/Nihon Tai-jutsu/Taijitsu/Nambudo/Ninjutsu/Nunchaku/...", "Aikido / Aikibudo / Budo", "Taekwondo / Hapkido / Tang-soo-do / Soo bahk do / Sin moo hapkido / Hapkido jin jung kwan", "Tai chi chuan / Chi gong"]
+  },
+  {
+    "sport": "Sports nautiques",
+    "practices": ["Planche à Voile", "Aviron", "Ski nautique classique / Course / à figures libres / nupieds / Kneeboard / Wake-board"]
+  },
+  {
+    "sport": "Haltérophilie et musculation",
+    "practices": ["Haltérophilie / Force athlétique", "Musculation", "Culturisme", "Haltérophilie / Force athlétique"]
+  },
+  {
+    "sport": "Escalade",
+    "practices": ["Escalade sur PAH", "Escalade"]
+  },
+  {
+    "sport": "Saut",
+    "practices": ["Saut", "Parachutisme", "Saut d'obstacle"]
+  },
+  {
+    "sport": "Danse",
+    "practices": ["Danses par Couple (Danses de compétition)", "Autres Danses"]
+  },
+  {
+    "sport": "Sports de quilles",
+    "practices": ["Sports de quilles", "Bowling"]
+  },
+  {
+    "sport": "Parachutisme",
+    "practices": ["Parachutisme"]
+  },
+  {
+    "sport": "Sports de patins",
+    "practices": ["Patinage artistique et danse sur roulettes", "Patinage de course", "Hockey sur patins en ligne / Hockey sur patins", "Roller acrobatique", "Ballet sur glace / Danse sur glace / Patinage artistique", "Hockey sur glace / Ringuette"]
+  },
+  {
+    "sport": "Fitness",
+    "practices": ["Activités de forme et de santé"]
+  },
+  {
+    "sport": "Sports de boules",
+    "practices": ["Pétanque et jeu provencal", "Sports boules", "Billard (Français (carambole),Snooker,Anglais,Américain)"]
+  },
+  {
+    "sport": "Sports de glisse",
+    "practices": ["Planche à roulettes (Skate)"]
+  },
+  {
+    "sport": "Sport scolaire",
+    "practices": ["Sport scolaire"]
+  }
+]
