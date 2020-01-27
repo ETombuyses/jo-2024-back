@@ -1,14 +1,19 @@
+
 CREATE TABLE pratique_sportive(
         id        Int  Auto_increment  NOT NULL ,
         pratique  Text NOT NULL ,
         image_nom Text NOT NULL
 	,CONSTRAINT pratique_sportive_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
+
+
 CREATE TABLE type_etablissement(
         id   Int  Auto_increment  NOT NULL ,
         type Text NOT NULL
 	,CONSTRAINT type_etablissement_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
+
+
 CREATE TABLE etablissement_sportif(
         id                                      Int  Auto_increment  NOT NULL ,
         type_pratique                           Varchar (50) ,
@@ -30,23 +35,27 @@ CREATE TABLE etablissement_sportif(
 	,CONSTRAINT etablissement_sportif_pratique_sportive_FK FOREIGN KEY (id_pratique_sportive) REFERENCES pratique_sportive(id)
 	,CONSTRAINT etablissement_sportif_type_etablissement0_FK FOREIGN KEY (id_type_etablissement) REFERENCES type_etablissement(id)
 )ENGINE=InnoDB;
+
 CREATE TABLE categorie_sport(
         id         Int  Auto_increment  NOT NULL ,
         sport_name Varchar (50) NOT NULL
 	,CONSTRAINT categorie_sport_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
+
+
 CREATE TABLE epreuve_olympique(
         id                   Int  Auto_increment  NOT NULL ,
-        nom_lieu_epreuve     Varchar (50) NOT NULL ,
-        date                 Date NOT NULL ,
-        insee_arrondissement Int NOT NULL ,
         nom_epreuve          Varchar (50) NOT NULL ,
-        nom_image            Varchar (50) NOT NULL ,
+        nom_lieu_epreuve     Varchar (50) NOT NULL ,
+        insee_arrondissement Int NOT NULL ,
+        date                 Date NOT NULL ,
+        image_nom            Varchar (50) NOT NULL ,
         id_categorie_sport   Int NOT NULL
 	,CONSTRAINT epreuve_olympique_PK PRIMARY KEY (id)
 
 	,CONSTRAINT epreuve_olympique_categorie_sport_FK FOREIGN KEY (id_categorie_sport) REFERENCES categorie_sport(id)
 )ENGINE=InnoDB;
+
 CREATE TABLE sport_pratiques(
         id                 Int NOT NULL ,
         id_categorie_sport Int NOT NULL
@@ -55,3 +64,4 @@ CREATE TABLE sport_pratiques(
 	,CONSTRAINT sport_pratiques_pratique_sportive_FK FOREIGN KEY (id) REFERENCES pratique_sportive(id)
 	,CONSTRAINT sport_pratiques_categorie_sport0_FK FOREIGN KEY (id_categorie_sport) REFERENCES categorie_sport(id)
 )ENGINE=InnoDB;
+

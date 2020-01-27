@@ -238,35 +238,61 @@ foreach($sport_families_json as $sport) {
 // --------------- epreuve_olympique -------------------- //
 
 
-// TODO :
+foreach ($olympics_json as $olympic_event) {
+
+    $image = 'toto';
+
+    $request = $pdo->prepare('SELECT id FROM categorie_sport WHERE sport_name = :olympic_event');
+    $request->bindParam(':olympic_event', $olympic_event['sportfamily']);
+    $request->execute();
+    $id_sport_family = $request->fetch(PDO::FETCH_ASSOC);
+
+    foreach($olympic_event['dates'] as $date) {
+        $request = $pdo->prepare('INSERT INTO epreuve_olympique(nom_epreuve, nom_lieu_epreuve, insee_arrondissement, date, image_nom, id_categorie_sport)
+        VALUES (
+        :epreuve,
+        :lieu,
+        :insee,
+        :date,
+        :image,
+        :id_categorie_sport)');
+        $request->bindParam(':epreuve', $olympic_event['discipline']);
+        $request->bindParam(':lieu', $olympic_event['lieu']);
+        $request->bindParam(':insee', $olympic_event['arrondissementcode']);
+        $request->bindParam(':date', $date);
+        $request->bindParam(':image', $image);
+        $request->bindParam(':id_categorie_sport', $id_sport_family['id']);
+        $request->execute();
+    }
+}
 
 
 
 // --------------- sport_pratiques -------------------- //
 
 
-// TODO:
-
 foreach($sport_families_json as $sport) {
+
+    $db_sport_family_request = $pdo->prepare('SELECT id from categorie_sport WHERE sport_name = :sport');
+    $db_sport_family_request->bindParam(':sport', $sport['sport']);
+    $db_sport_family_request->execute();
+    $db_sport_family_id = $db_sport_family_request->fetch(PDO::FETCH_ASSOC);
+
+
     foreach ($sport['practices'] as $sport_practice) {
-        $db_practise_request = $pdo->prepare('SELECT id from pratique_sportive WHERE pratique === :practice');
-        $db_practise_request->bindParam(':practice', $sport['sport']);
+
+        $db_practise_request = $pdo->prepare('SELECT id from pratique_sportive WHERE pratique = :practice');
+        $db_practise_request->bindParam(':practice', $sport_practice);
         $db_practise_request->execute();
         $db_practise_id = $db_practise_request->fetch(PDO::FETCH_ASSOC);
 
-
-        $db_sport_family_request = $pdo->prepare('SELECT id from categorie_sport WHERE sport_name === :sport');
-        $db_sport_family_request->bindParam(':sport', $sport_practice);
-        $db_sport_family_request->execute();
-        $db_sport_family_id = $db_sport_family_request->fetch(PDO::FETCH_ASSOC);
 
 
         // INSERT INTO
         $request = $pdo->prepare('INSERT INTO sport_pratiques(id, id_categorie_sport) VALUES (
         :id_practice, :id_sport_family)');
-        $request->bindParam(':id_practice', $db_practise_id);
-        $request->bindParam(':id_sport_family', $sport['sport']);
+        $request->bindParam(':id_practice', $db_practise_id['id']);
+        $request->bindParam(':id_sport_family', $db_sport_family_id['id']);
         $request->execute();
-
     }
 }
