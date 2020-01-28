@@ -21,6 +21,8 @@ $pdo  = new PDO(
 // pratique_sportive
 // etablissement_sportif
 // epreuve_olympique
+// categorie_sport
+// sport_pratiques
 
 
 // -------------- files
@@ -78,7 +80,7 @@ $sport_practises = [];
 
 foreach($sport_facilities_json as $sport_facility) {
 
-    if (isset($sport_facility['fields']['actcode']) && !in_array(['id' => $sport_facility['fields']['actcode'], 'name'=> $sport_facility['fields']['actlib']] , $sport_practises)){
+    if (isset($sport_facility['fields']['actcode']) && !in_array(['id' => $sport_facility['fields']['actcode'], 'name'=> $sport_facility['fields']['actlib']], $sport_practises)){
         array_push(  $sport_practises, [
             'id'=> $sport_facility['fields']['actcode'],
             'name'=> $sport_facility['fields']['actlib']
@@ -95,14 +97,17 @@ $special_char = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á
 
 foreach($sport_practises as $practise) {
     $image_name = $practise['name'];
+    $practice_name = $practise['name'];
 
     if (strpos($image_name, "/")) {
         $image_name = substr($image_name, 0, strpos($image_name, "/"));
+        $practice_name = substr($practice_name, 0, strpos($practice_name, "/"));
     }
     if (strpos($image_name, "(")) {
         $image_name = substr($image_name, 0, strpos($image_name, "("));
     }
     $image_name = trim($image_name);
+    $practice_name = trim($practice_name);
     $image_name = strtr( $image_name, $special_char);
     $image_name = strtolower($image_name);
 
@@ -112,7 +117,7 @@ foreach($sport_practises as $practise) {
 :id, :denomination, :image)');
 
     $request->bindParam(':id', $practise['id']);
-    $request->bindParam(':denomination', $practise['name']);
+    $request->bindParam(':denomination', $practice_name);
     $request->bindParam(':image', $image_name);
     $request->execute();
 }
@@ -298,8 +303,16 @@ foreach($sport_families_json as $sport) {
 
     foreach ($sport['practices'] as $sport_practice) {
 
+
+        $practice_name = $sport_practice;
+        if (strpos($practice_name, "/")) {
+            $practice_name = substr($practice_name, 0, strpos($practice_name, "/"));
+        }
+        $practice_name = trim($practice_name);
+
+
         $db_practise_request = $pdo->prepare('SELECT id from pratique_sportive WHERE pratique = :practice');
-        $db_practise_request->bindParam(':practice', $sport_practice);
+        $db_practise_request->bindParam(':practice', $practice_name);
         $db_practise_request->execute();
         $db_practise_id = $db_practise_request->fetch(PDO::FETCH_ASSOC);
 
