@@ -1,7 +1,7 @@
 [
   {
     "sport": "Athlétisme",
-    "practices": ["Course sur piste", "Lancer", "Javelot Tir sur cible", "Saut", "Saut d'obstacle"]
+    "practices": ["Course sur piste", "Lancer", "Javelot Tir sur cible", "Saut", "Saut d'obstacle", "Athlétisme"]
   },
   {
     "sport": "Lancer",
@@ -14,11 +14,11 @@
 
   {
     "sport": "Cyclisme",
-    "practices": ["Bicross (BMX)", "Cyclisme sur piste", "Cyclisme en salle"]
+    "practices": ["Bicross (BMX)", "Cyclisme sur piste", "Cyclisme en salle", "Cyclisme sur route", "VTT"]
   },
   {
   "sport": "Triathlon",
-  "practices": ["Natation course sportive", "Course et marche sur route (hors stade)", "Cyclisme en salle", "Cyclisme sur piste", "Course sur piste"]
+  "practices": ["Natation course sportive", "Course et marche sur route (hors stade)", "Cyclisme en salle", "Cyclisme sur piste", "Course sur piste", "Triathlon"]
   },
   {
     "sport": "Course et marche",
@@ -34,7 +34,7 @@
   },
   {
     "sport": "Pentatlhon",
-    "practices": ["Natation course sportive", "Escrime (Epée / Fleuret / Sabre )", "Equitation", "Tir aux armes réglementaires", "Course sur piste", "Course et marche sur route (hors stade)"]
+    "practices": ["Natation course sportive", "Escrime (Epée / Fleuret / Sabre )", "Equitation", "Tir aux armes réglementaires", "Course sur piste", "Course et marche sur route (hors stade)", "Pentatlhon"]
   },
   {
     "sport": "Sports de ballon",
@@ -66,7 +66,7 @@
   },
   {
     "sport": "Sports nautiques",
-    "practices": ["Planche à Voile", "Aviron", "Ski nautique classique / Course / à figures libres / nupieds / Kneeboard / Wake-board"]
+    "practices": ["Planche à Voile", "Aviron", "Ski nautique classique / Course / à figures libres / nupieds / Kneeboard / Wake-board", "Canoë-Kayak"]
   },
   {
     "sport": "Haltérophilie et musculation",

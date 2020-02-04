@@ -88,6 +88,7 @@ foreach($sport_facilities_json as $sport_facility) {
     }
 }
 
+
 $special_char = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
     'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
     'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
@@ -104,8 +105,14 @@ foreach($sport_practises as $practise) {
         $practice_name = substr($practice_name, 0, strpos($practice_name, "/"));
     }
     if (strpos($image_name, "(")) {
+        $practice_name = substr($practice_name, 0, strpos($practice_name, "("));
         $image_name = substr($image_name, 0, strpos($image_name, "("));
     }
+
+    if (strpos($practice_name, ",")) {
+        $practice_name = substr($practice_name, 0, strpos($practice_name, ","));
+    }
+
     $image_name = trim($image_name);
     $practice_name = trim($practice_name);
     $image_name = strtr( $image_name, $special_char);
@@ -122,10 +129,27 @@ foreach($sport_practises as $practise) {
     $request->execute();
 }
 
+// TODO: à finir demain
+ foreach ($olympics_json as $olympic) {
+   $request = $pdo->prepare('SELECT pratique FROM pratique_sportive WHERE pratique = :pratique');
+   $request->bindParam(':pratique', $olympic['sportfamily']);
+   $request->execute();
+   $result = $request->fetch(PDO::FETCH_ASSOC);
 
-// DONE: renommer les noms des pratiques sportives quand elles sont trop longues
+   if (!$result) {
 
+       $image_name = trim($olympic['sportfamily']);
+       $image_name = strtr( $image_name, $special_char);
+       $image_name = strtolower($image_name);
 
+       $request = $pdo->prepare('INSERT INTO pratique_sportive(pratique, image_nom) VALUES (
+:denomination, :image)');
+
+       $request->bindParam(':denomination', $olympic['sportfamily']);
+       $request->bindParam(':image', $image_name);
+       $request->execute();
+   }
+}
 
 
 // -----------  etablissement_sportif ------------- //
@@ -260,30 +284,24 @@ foreach($sport_families_json as $sport) {
 
 foreach ($olympics_json as $olympic_event) {
 
-
-    $image = strtr( $olympic_event['sportfamily'], $special_char);
-    $image = strtolower($image);
-
-    $request = $pdo->prepare('SELECT id FROM categorie_sport WHERE sport_name = :olympic_event');
+    $request = $pdo->prepare('SELECT id FROM pratique_sportive WHERE pratique = :olympic_event');
     $request->bindParam(':olympic_event', $olympic_event['sportfamily']);
     $request->execute();
-    $id_sport_family = $request->fetch(PDO::FETCH_ASSOC);
+    $id_practice = $request->fetch(PDO::FETCH_ASSOC);
 
     foreach($olympic_event['dates'] as $date) {
-        $request = $pdo->prepare('INSERT INTO epreuve_olympique(nom_epreuve, nom_lieu_epreuve, insee_arrondissement, date, image_nom, id_categorie_sport)
+        $request = $pdo->prepare('INSERT INTO epreuve_olympique(nom_epreuve, nom_lieu_epreuve, insee_arrondissement, date, id_pratique_sportive)
         VALUES (
         :epreuve,
         :lieu,
         :insee,
         :date,
-        :image,
         :id_categorie_sport)');
         $request->bindParam(':epreuve', $olympic_event['discipline']);
         $request->bindParam(':lieu', $olympic_event['lieu']);
         $request->bindParam(':insee', $olympic_event['arrondissementcode']);
         $request->bindParam(':date', $date);
-        $request->bindParam(':image', $image);
-        $request->bindParam(':id_categorie_sport', $id_sport_family['id']);
+        $request->bindParam(':id_categorie_sport', $id_practice['id']);
         $request->execute();
     }
 }
@@ -307,6 +325,13 @@ foreach($sport_families_json as $sport) {
         $practice_name = $sport_practice;
         if (strpos($practice_name, "/")) {
             $practice_name = substr($practice_name, 0, strpos($practice_name, "/"));
+        }
+        if (strpos($practice_name, "(")) {
+            $practice_name = substr($practice_name, 0, strpos($practice_name, "("));
+        }
+
+        if (strpos($practice_name, ",")) {
+            $practice_name = substr($practice_name, 0, strpos($practice_name, ","));
         }
         $practice_name = trim($practice_name);
 

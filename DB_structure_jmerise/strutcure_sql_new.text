@@ -1,0 +1,96 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: pratique_sportive
+#------------------------------------------------------------
+
+CREATE TABLE pratique_sportive(
+        id        Int  Auto_increment  NOT NULL ,
+        pratique  Text NOT NULL ,
+        image_nom Text NOT NULL
+	,CONSTRAINT pratique_sportive_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: type_etablissement
+#------------------------------------------------------------
+
+CREATE TABLE type_etablissement(
+        id   Int  Auto_increment  NOT NULL ,
+        type Text NOT NULL
+	,CONSTRAINT type_etablissement_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: etablissement_sportif
+#------------------------------------------------------------
+
+CREATE TABLE etablissement_sportif(
+        id                                      Int  Auto_increment  NOT NULL ,
+        type_pratique                           Varchar (50) ,
+        acces_handicap_mobilite_aire_sportive   Bool NOT NULL ,
+        acces_handicap_sensoriel_aire_sportive  Bool NOT NULL ,
+        acces_handicap_sensoriel_vestiaire      Bool NOT NULL ,
+        acces_handicap_mobilite_vestiaire       Bool NOT NULL ,
+        acces_handicap_mobilite_natation        Bool NOT NULL ,
+        acces_handicap_sensoriel_sanitaire      Bool NOT NULL ,
+        acces_handicap_mobilite_sanitaire       Bool NOT NULL ,
+        nom_etablissement                       Text ,
+        adresse_num                             Int NOT NULL ,
+        adresse_voie                            Text NOT NULL ,
+        insee_arrondissement                    Int NOT NULL ,
+        id_pratique_sportive                    Int NOT NULL ,
+        id_type_etablissement                   Int NOT NULL
+	,CONSTRAINT etablissement_sportif_PK PRIMARY KEY (id)
+
+	,CONSTRAINT etablissement_sportif_pratique_sportive_FK FOREIGN KEY (id_pratique_sportive) REFERENCES pratique_sportive(id)
+	,CONSTRAINT etablissement_sportif_type_etablissement0_FK FOREIGN KEY (id_type_etablissement) REFERENCES type_etablissement(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: epreuve_olympique
+#------------------------------------------------------------
+
+CREATE TABLE epreuve_olympique(
+        id                   Int  Auto_increment  NOT NULL ,
+        nom_epreuve          Varchar (50) NOT NULL ,
+        nom_lieu_epreuve     Varchar (50) NOT NULL ,
+        insee_arrondissement Int NOT NULL ,
+        date                 Date NOT NULL ,
+        id_pratique_sportive Int NOT NULL
+	,CONSTRAINT epreuve_olympique_PK PRIMARY KEY (id)
+
+	,CONSTRAINT epreuve_olympique_pratique_sportive_FK FOREIGN KEY (id_pratique_sportive) REFERENCES pratique_sportive(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: categorie_sport
+#------------------------------------------------------------
+
+CREATE TABLE categorie_sport(
+        id         Int  Auto_increment  NOT NULL ,
+        sport_name Varchar (50) NOT NULL
+	,CONSTRAINT categorie_sport_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: sport_pratiques
+#------------------------------------------------------------
+
+CREATE TABLE sport_pratiques(
+        id                 Int NOT NULL ,
+        id_categorie_sport Int NOT NULL
+	,CONSTRAINT sport_pratiques_PK PRIMARY KEY (id,id_categorie_sport)
+
+	,CONSTRAINT sport_pratiques_pratique_sportive_FK FOREIGN KEY (id) REFERENCES pratique_sportive(id)
+	,CONSTRAINT sport_pratiques_categorie_sport0_FK FOREIGN KEY (id_categorie_sport) REFERENCES categorie_sport(id)
+)ENGINE=InnoDB;
+
