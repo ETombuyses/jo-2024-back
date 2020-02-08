@@ -51,8 +51,6 @@ foreach($sport_facilities_json as $sport_facility) {
             'type'=> $sport_facility['fields']['equipementtypelib']
         ] );
     }
-
-
 }
 
 

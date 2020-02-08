@@ -1,352 +1,352 @@
 [
   {
-    "discipline": "Athlétisme",
-    "lieu": "Stade de France",
+    "sport": "Athlétisme",
+    "place": "Stade de France",
     "dates": ["2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04","2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "93066",
-    "sportfamily": "Athlétisme"
+    "arrondissementInsee": "93066",
+    "sportsFamily": "Athlétisme"
   },
   {
-    "discipline": "Beach volley",
-    "lieu": "Champ-de-Mars",
+    "sport": "Beach volley",
+    "place": "Champ-de-Mars",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04","2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75107",
-    "sportfamily": "Volley-ball"
+    "arrondissementInsee": "75107",
+    "sportsFamily": "Volley-ball"
   },
   {
-    "discipline": "Cyclisme sur route",
-    "lieu": "Champs-Elysées",
+    "sport": "Cyclisme sur route",
+    "place": "Champs-Elysées",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-29"],
-    "arrondissementcode": "75108",
-    "sportfamily": "Cyclisme sur route"
+    "arrondissementInsee": "75108",
+    "sportsFamily": "Cyclisme sur route"
   },
   {
-    "discipline": "Triathlon",
-    "lieu": "Tour Eiffel",
+    "sport": "Triathlon",
+    "place": "Tour Eiffel",
     "dates": ["2024-07-27", "2024-07-28", "2024-08-01"],
-    "arrondissementcode": "75107",
-    "sportfamily": "Triathlon"
+    "arrondissementInsee": "75107",
+    "sportsFamily": "Triathlon"
   },
   {
-    "discipline": "Marathon",
-    "lieu": "Tour Eiffel",
+    "sport": "Marathon",
+    "place": "Tour Eiffel",
     "dates": ["2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75107",
-    "sportfamily": "Course et marche sur route"
+    "arrondissementInsee": "75107",
+    "sportsFamily": "Course et marche sur route"
   },
   {
-    "discipline": "Natation marathon",
-    "lieu": "Tour Eiffel",
+    "sport": "Natation marathon",
+    "place": "Tour Eiffel",
     "dates": ["2024-08-05", "2024-08-06"],
-    "arrondissementcode": "75107",
-    "sportfamily": "Natation course sportive"
+    "arrondissementInsee": "75107",
+    "sportsFamily": "Natation course sportive"
   },
   {
-    "discipline": "Escrime",
-    "lieu": "Grand Palais",
+    "sport": "Escrime",
+    "place": "Grand Palais",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75108",
-    "sportfamily": "Escrime"
+    "arrondissementInsee": "75108",
+    "sportsFamily": "Escrime"
   },
   {
-    "discipline": "Taekwondo",
-    "lieu": "Grand Palais",
+    "sport": "Taekwondo",
+    "place": "Grand Palais",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29"],
-    "arrondissementcode": "75108",
-    "sportfamily": "Taekwondo"
+    "arrondissementInsee": "75108",
+    "sportsFamily": "Taekwondo"
   },
   {
-    "discipline": "Tir à l'arc",
-    "lieu": "Esplanade des Invalides",
+    "sport": "Tir à l'arc",
+    "place": "Esplanade des Invalides",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-30", "2024-08-01", "2024-08-02"],
-    "arrondissementcode": "75107",
-    "sportfamily": "Tir à l'arc"
+    "arrondissementInsee": "75107",
+    "sportsFamily": "Tir à l'arc"
   },
   {
-    "discipline": "Football",
-    "lieu": "Parc des Princes",
+    "sport": "Football",
+    "place": "Parc des Princes",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "75116",
-    "sportfamily": "Football"
+    "arrondissementInsee": "75116",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Handball",
-    "lieu": "Parc des expositions de la Porte de Versailles",
+    "sport": "Handball",
+    "place": "Parc des expositions de la Porte de Versailles",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10"],
-    "arrondissementcode": "75115",
-    "sportfamily": "Handball"
+    "arrondissementInsee": "75115",
+    "sportsFamily": "Handball"
   },
   {
-    "discipline": "Tennis de table",
-    "lieu": "Parc des expositions de la Porte de Versailles",
+    "sport": "Tennis de table",
+    "place": "Parc des expositions de la Porte de Versailles",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75115",
-    "sportfamily": "Tennis de table"
+    "arrondissementInsee": "75115",
+    "sportsFamily": "Tennis de table"
   },
   {
-    "discipline": "Rugby à sept",
-    "lieu": "Stade Jean Bouin",
+    "sport": "Rugby à sept",
+    "place": "Stade Jean Bouin",
     "dates": ["2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01"],
-    "arrondissementcode": "75115",
-    "sportfamily": "Rugby à 13"
+    "arrondissementInsee": "75115",
+    "sportsFamily": "Rugby à 13"
   },
   {
-    "discipline": "Tennis",
-    "lieu": "Roland-Garros",
+    "sport": "Tennis",
+    "place": "Roland-Garros",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03"],
-    "arrondissementcode": "75116",
-    "sportfamily": "Tennis"
+    "arrondissementInsee": "75116",
+    "sportsFamily": "Tennis"
   },
   {
-    "discipline": "Boxe",
-    "lieu": "Roland-Garros",
+    "sport": "Boxe",
+    "place": "Roland-Garros",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07","2024-08-08", "2024-08-09", "2024-08-10"],
-    "arrondissementcode": "75116",
-    "sportfamily": "Boxe Anglaise"
+    "arrondissementInsee": "75116",
+    "sportsFamily": "Boxe Anglaise"
   },
   {
-    "discipline": "Basket",
-    "lieu": "Accor Hotels Arena",
+    "sport": "Basket",
+    "place": "Accor Hotels Arena",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03" ,"2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07","2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75112",
-    "sportfamily": "Basket-Ball"
+    "arrondissementInsee": "75112",
+    "sportsFamily": "Basket-Ball"
   },
   {
-    "discipline": "Judo",
-    "lieu": "Accor Hotels Arena",
+    "sport": "Judo",
+    "place": "Accor Hotels Arena",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02"],
-    "arrondissementcode": "75112",
-    "sportfamily": "Judo"
+    "arrondissementInsee": "75112",
+    "sportsFamily": "Judo"
   },
   {
-    "discipline": "Haltérophilie",
-    "lieu": "Zénith",
+    "sport": "Haltérophilie",
+    "place": "Zénith",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06"],
-    "arrondissementcode": "75119",
-    "sportfamily": "Haltérophilie"
+    "arrondissementInsee": "75119",
+    "sportsFamily": "Haltérophilie"
   },
   {
-    "discipline": "Hockey sur gazon",
-    "lieu": "Stade Yves-du-Manoir",
+    "sport": "Hockey sur gazon",
+    "place": "Stade Yves-du-Manoir",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "92025",
-    "sportfamily": "Hockey en salle"
+    "arrondissementInsee": "92025",
+    "sportsFamily": "Hockey en salle"
   },
   {
-    "discipline": "Canoë-Kayak",
-    "lieu": "Base nautique",
+    "sport": "Canoë-Kayak",
+    "place": "Base nautique",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "77479",
-    "sportfamily": "Canoë-Kayak"
+    "arrondissementInsee": "77479",
+    "sportsFamily": "Canoë-Kayak"
   },
   {
-    "discipline": "Aviron",
-    "lieu": "Base nautique",
+    "sport": "Aviron",
+    "place": "Base nautique",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01"],
-    "arrondissementcode": "77479",
-    "sportfamily": "Aviron"
+    "arrondissementInsee": "77479",
+    "sportsFamily": "Aviron"
   },
   {
-    "discipline": "Cyclisme sur piste",
-    "lieu": "Vélodrome national",
+    "sport": "Cyclisme sur piste",
+    "place": "Vélodrome national",
     "dates": ["2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "78423",
-    "sportfamily": "Cyclisme sur piste"
+    "arrondissementInsee": "78423",
+    "sportsFamily": "Cyclisme sur piste"
   },
   {
-    "discipline": "Pentathlon moderne",
-    "lieu": "Vélodrome national",
+    "sport": "Pentathlon moderne",
+    "place": "Vélodrome national",
     "dates": ["2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "78423",
-    "sportfamily": "Pentatlhon"
+    "arrondissementInsee": "78423",
+    "sportsFamily": "Pentatlhon"
   },
   {
-    "discipline": "BMX",
-    "lieu": "Vélodrome national",
+    "sport": "BMX",
+    "place": "Vélodrome national",
     "dates": ["2024-07-30", "2024-07-31", "2024-08-01" ,"2024-08-02"],
-    "arrondissementcode": "78423",
-    "sportfamily": "Bicross"
+    "arrondissementInsee": "78423",
+    "sportsFamily": "Bicross"
   },
   {
-    "discipline": "Equitation",
-    "lieu": "Château de Versailles",
+    "sport": "Equitation",
+    "place": "Château de Versailles",
     "dates": ["2024-07-26", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "78646",
-    "sportfamily": "Equitation"
+    "arrondissementInsee": "78646",
+    "sportsFamily": "Equitation"
   },
   {
-    "discipline": "Pentathlon moderne",
-    "lieu": "Château de Versailles",
+    "sport": "Pentathlon moderne",
+    "place": "Château de Versailles",
     "dates": ["2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "78646",
-    "sportfamily": "Pentatlhon"
+    "arrondissementInsee": "78646",
+    "sportsFamily": "Pentatlhon"
   },
   {
-    "discipline": "Gymnastique",
-    "lieu": "Arena 92",
+    "sport": "Gymnastique",
+    "place": "Arena 92",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05"],
-    "arrondissementcode": "92050",
-    "sportfamily": "Gymnastique Artistique"
+    "arrondissementInsee": "92050",
+    "sportsFamily": "Gymnastique Artistique"
   },
   {
-    "discipline": "Trampoline",
-    "lieu": "Arena 92",
+    "sport": "Trampoline",
+    "place": "Arena 92",
     "dates": ["2024-07-31", "2024-08-01"],
-    "arrondissementcode": "92050",
-    "sportfamily": "Gymnastique Acrobatique"
+    "arrondissementInsee": "92050",
+    "sportsFamily": "Gymnastique Acrobatique"
   },
   {
-    "discipline": "GRS",
-    "lieu": "Arena 92",
+    "sport": "GRS",
+    "place": "Arena 92",
     "dates": ["2024-08-07", "2024-08-08", "2024-08-09"],
-    "arrondissementcode": "92050",
-    "sportfamily": "Gymnastique Rythmique"
+    "arrondissementInsee": "92050",
+    "sportsFamily": "Gymnastique Rythmique"
   },
   {
-    "discipline": "Natation",
-    "lieu": "Centre aquatique",
+    "sport": "Natation",
+    "place": "Centre aquatique",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03"],
-    "arrondissementcode": "93001",
-    "sportfamily": "Natation course sportive"
+    "arrondissementInsee": "93001",
+    "sportsFamily": "Natation course sportive"
   },
   {
-    "discipline": "Natation synchronisée",
-    "lieu": "Centre aquatique",
+    "sport": "Natation synchronisée",
+    "place": "Centre aquatique",
     "dates": ["2024-08-03", "2024-08-04", "2024-08-05", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "93001",
-    "sportfamily": "Natation synchronisée"
+    "arrondissementInsee": "93001",
+    "sportsFamily": "Natation synchronisée"
   },
   {
-    "discipline": "Natation plongeon",
-    "lieu": "Centre aquatique",
+    "sport": "Natation plongeon",
+    "place": "Centre aquatique",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "93001",
-    "sportfamily": "Plongeon"
+    "arrondissementInsee": "93001",
+    "sportsFamily": "Plongeon"
   },
   {
-    "discipline": "Golf",
-    "lieu": "Golf National",
+    "sport": "Golf",
+    "place": "Golf National",
     "dates": ["2024-07-31", "2024-08-01", "2024-08-02", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08"],
-    "arrondissementcode": "78690",
-    "sportfamily": "Golf"
+    "arrondissementInsee": "78690",
+    "sportsFamily": "Golf"
   },
   {
-    "discipline": "Voile",
-    "lieu": "Marina",
+    "sport": "Voile",
+    "place": "Marina",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05"],
-    "arrondissementcode": "13055",
-    "sportfamily": "Planche à Voile"
+    "arrondissementInsee": "13055",
+    "sportsFamily": "Planche à Voile"
   },
   {
-    "discipline": "Volley",
-    "lieu": "Salon des Expositions",
+    "sport": "Volley",
+    "place": "Salon des Expositions",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "93013",
-    "sportfamily": "Volley-ball"
+    "arrondissementInsee": "93013",
+    "sportsFamily": "Volley-ball"
   },
   {
-    "discipline": "Badminton",
-    "lieu": "Salon des Expositions",
+    "sport": "Badminton",
+    "place": "Salon des Expositions",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03", "2024-08-04"],
-    "arrondissementcode": "93013",
-    "sportfamily": "Badminton"
+    "arrondissementInsee": "93013",
+    "sportsFamily": "Badminton"
   },
   {
-    "discipline": "Tir",
-    "lieu": "Salon des Expositions",
+    "sport": "Tir",
+    "place": "Salon des Expositions",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02"],
-    "arrondissementcode": "93013",
-    "sportfamily": "Tir aux armes réglementaires"
+    "arrondissementInsee": "93013",
+    "sportsFamily": "Tir aux armes réglementaires"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Bordeaux",
+    "sport": "Football",
+    "place": "Stade de football - Bordeaux",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "33063",
-    "sportfamily": "Football"
+    "arrondissementInsee": "33063",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Bordeaux",
+    "sport": "Football",
+    "place": "Stade de football - Bordeaux",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "33063",
-    "sportfamily": "Football"
+    "arrondissementInsee": "33063",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Nantes",
+    "sport": "Football",
+    "place": "Stade de football - Nantes",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "44109",
-    "sportfamily": "Football"
+    "arrondissementInsee": "44109",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Lille",
+    "sport": "Football",
+    "place": "Stade de football - Lille",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "59350",
-    "sportfamily": "Football"
+    "arrondissementInsee": "59350",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Lyon",
+    "sport": "Football",
+    "place": "Stade de football - Lyon",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "69300",
-    "sportfamily": "Football"
+    "arrondissementInsee": "69300",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Saint-Etienne",
+    "sport": "Football",
+    "place": "Stade de football - Saint-Etienne",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "42218",
-    "sportfamily": "Football"
+    "arrondissementInsee": "42218",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Nice",
+    "sport": "Football",
+    "place": "Stade de football - Nice",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "06088",
-    "sportfamily": "Football"
+    "arrondissementInsee": "06088",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Marseille",
+    "sport": "Football",
+    "place": "Stade de football - Marseille",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "13055",
-    "sportfamily": "Football"
+    "arrondissementInsee": "13055",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Football",
-    "lieu": "Stade de football - Toulouse",
+    "sport": "Football",
+    "place": "Stade de football - Toulouse",
     "dates": ["2024-07-26", "2024-07-29", "2024-07-31", "2024-08-01", "2024-08-03", "2024-08-04", "2024-08-06", "2024-08-07", "2024-08-08", "2024-08-09", "2024-08-10", "2024-08-11"],
-    "arrondissementcode": "31555",
-    "sportfamily": "Football"
+    "arrondissementInsee": "31555",
+    "sportsFamily": "Football"
   },
   {
-    "discipline": "Basket",
-    "lieu": "Arena 2",
+    "sport": "Basket",
+    "place": "Arena 2",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03" ,"2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07","2024-08-08", "2024-08-09"],
-    "arrondissementcode": "75118",
-    "sportfamily": "Basket-Ball"
+    "arrondissementInsee": "75118",
+    "sportsFamily": "Basket-Ball"
   },
   {
-    "discipline": "Lutte",
-    "lieu": "Arena 2",
+    "sport": "Lutte",
+    "place": "Arena 2",
     "dates": ["2024-08-02", "2024-08-03" ,"2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07","2024-08-08"],
-    "arrondissementcode": "75118",
-    "sportfamily": "Lutte traditionnelle"
+    "arrondissementInsee": "75118",
+    "sportsFamily": "Lutte traditionnelle"
   },
   {
-    "discipline": "VTT",
-    "lieu": "Coline d’Élancourt",
+    "sport": "VTT",
+    "place": "Coline d’Élancourt",
     "dates": ["2024-07-27", "2024-07-28"],
-    "arrondissementcode": "78208",
-    "sportfamily": "VTT"
+    "arrondissementInsee": "78208",
+    "sportsFamily": "VTT"
   },
   {
-    "discipline": "Water-polo",
-    "lieu": "Piscine de Marville",
+    "sport": "Water-polo",
+    "place": "Piscine de Marville",
     "dates": ["2024-07-26", "2024-07-27", "2024-07-28", "2024-07-29", "2024-07-30", "2024-07-31", "2024-08-01", "2024-08-02", "2024-08-03" ,"2024-08-04", "2024-08-05", "2024-08-06", "2024-08-07","2024-08-08", "2024-08-09", "2024-08-10"],
-    "arrondissementcode": "93066",
-    "sportfamily": "Water-Polo"
+    "arrondissementInsee": "93066",
+    "sportsFamily": "Water-Polo"
   }
 ]
