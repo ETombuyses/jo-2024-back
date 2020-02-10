@@ -14,14 +14,16 @@ $pdo  = new PDO(
 
 
 // -------- DATABASE TABLES ----------------
-
-// arrondissement
-// sports_facility_type
 // sports_practice
+// sports_facility_type
+// sports_family
+// arrondissement
 // sports_facility
 // olympic_event
-// sports_family
+// facility_type_association
+// facility_practice_association
 // sports_family_practice_association
+
 
 
 // ---------------- reused functions --------------------------
@@ -76,67 +78,6 @@ $sports_families_json = getFileJson('sports_families.json');
 // ----------------------------------------------------------------------------------
 
 
-//------------------- arrondissement ---------------------------------------------------- //
-
-// paris arrondissements
-foreach($arrondissements_json as $arrondissement) {
-
-    $km_square = round($arrondissement['fields']['surface'] / 10000) / 100;
-
-    $request = $pdo->prepare('INSERT INTO arrondissement(insee_code, name, surface_km_square, paris_arrondissement_number) VALUES (:insee, :name, :surface, :number)');
-    $request->bindParam(':insee', $arrondissement['fields']['c_arinsee']);
-    $request->bindParam(':name', $arrondissement['fields']['l_aroff']);
-    $request->bindParam(':surface', $km_square);
-    $request->bindParam(':number', $arrondissement['fields']['c_ar']);
-    $request->execute();
-}
-
-
-// other towns
-foreach ($olympics_json as $olympic_event) {
-
-    $request = $pdo->prepare('SELECT id FROM arrondissement WHERE insee_code = :insee_event');
-    $request->bindParam(':insee_event', $olympic_event['arrondissementInsee']);
-    $request->execute();
-    $paris_arrondissement_number = $request->fetch(PDO::FETCH_ASSOC);
-
-    if (!$paris_arrondissement_number) {
-        $request = $pdo->prepare('INSERT INTO arrondissement(insee_code, name) VALUES (:insee, :name)');
-        $request->bindParam(':insee', $olympic_event['arrondissementInsee']);
-        $request->bindParam(':name', $olympic_event['arrondissementName']);
-        $request->execute();
-    }
-}
-
-//------------------- sports_facility_type ---------------------------------------------------- //
-
-$sports_facility_types = [];
-
-foreach($sports_facilities_json as $sports_facility) {
-
-    if (isset($sports_facility['fields']['equipementtypecode'])) {
-
-        $facility_type_shortened_name = shorten_string($sports_facility['fields']['equipementtypelib'], "/");
-        $facility_type_shortened_name = trim($facility_type_shortened_name);
-
-        if (!in_array( ['id' => $sports_facility['fields']['equipementtypecode'], 'type'=> $facility_type_shortened_name] , $sports_facility_types )) {
-            array_push($sports_facility_types, [
-                'id'=> $sports_facility['fields']['equipementtypecode'],
-                'type'=> $facility_type_shortened_name
-            ]);
-        }
-    }
-}
-
-
-foreach($sports_facility_types as $type) {
-    $request = $pdo->prepare('INSERT INTO sports_facility_type(id, type) VALUES (:id, :type)');
-    $request->bindParam(':id', $type['id']);
-    $request->bindParam(':type', $type['type']);
-    $request->execute();
-}
-
-
 // ------------------- sports_practice ---------------------------------------------------- //
 
 $sports_practices = [];
@@ -160,6 +101,7 @@ foreach($sports_practices as $practice) {
     $practice_name = shorten_string($practice_name, "(");
     $practice_name = shorten_string($practice_name, ",");
     $practice_name = trim($practice_name);
+    $practice_name = str_replace(' - ', '-', $practice_name);
 
     $image_name = format_image_name($practice_name);
 
@@ -193,14 +135,82 @@ foreach ($olympics_json as $olympic_event) {
    }
 }
 
+//------------------- sports_facility_type ---------------------------------------------------- //
+
+$sports_facility_types = [];
+
+// fill the $sports_facility_types array with one occurence of each sports facility type
+foreach($sports_facilities_json as $sports_facility) {
+
+    if (isset($sports_facility['fields']['equipementtypecode'])) {
+
+        $facility_type_shortened_name = shorten_string($sports_facility['fields']['equipementtypelib'], "/");
+        $facility_type_shortened_name = trim($facility_type_shortened_name);
+
+        if (!in_array( ['id' => $sports_facility['fields']['equipementtypecode'], 'type'=> $facility_type_shortened_name] , $sports_facility_types )) {
+            array_push($sports_facility_types, [
+                'id'=> $sports_facility['fields']['equipementtypecode'],
+                'type'=> $facility_type_shortened_name
+            ]);
+        }
+    }
+}
+
+
+foreach($sports_facility_types as $type) {
+    $request = $pdo->prepare('INSERT INTO sports_facility_type(id, type) VALUES (:id, :type)');
+    $request->bindParam(':id', $type['id']);
+    $request->bindParam(':type', $type['type']);
+    $request->execute();
+}
+
+
+// ------------------------------ sports_family --------------------------------------------------- //
+
+// table with all the sports families (ball sports, swimming sports....)
+
+foreach($sports_families_json as $sports_family) {
+    $request = $pdo->prepare('INSERT INTO sports_family(sports_family_name) VALUES (:name)');
+    $request->bindParam(':name', $sports_family['sport']);
+    $request->execute();
+}
+
+
+//------------------- arrondissement ---------------------------------------------------- //
+
+// paris arrondissements
+foreach($arrondissements_json as $arrondissement) {
+
+    $km_square = round($arrondissement['fields']['surface'] / 10000) / 100;
+
+    $request = $pdo->prepare('INSERT INTO arrondissement(id, insee_code, name, surface_km_square) VALUES (:id, :insee, :name, :surface)');
+    $request->bindParam(':id', $arrondissement['fields']['c_ar']);
+    $request->bindParam(':insee', $arrondissement['fields']['c_arinsee']);
+    $request->bindParam(':name', $arrondissement['fields']['l_aroff']);
+    $request->bindParam(':surface', $km_square);
+    $request->execute();
+}
+
+
+
+
 
 // ----------- sports_facility ---------------------------------------------------------------------- //
 
 // sort data to keep only facilities that have a complete address + a facility type + a sport practice
+// first check if the facility is not already in the db (facilities in the json data can occur multiple times)
 
 foreach($sports_facilities_json as $sports_facility) {
 
-    if (isset($sports_facility['fields']['insnovoie'])
+    // check if is in db
+    $request = $pdo->prepare('SELECT id FROM sports_facility WHERE id = :id');
+    $request->bindParam(':id', $sports_facility['fields']['equipementid']);
+    $request->execute();
+    $is_already_in_db = $request->fetch(PDO::FETCH_ASSOC);
+
+
+    if (!$is_already_in_db
+        && isset($sports_facility['fields']['insnovoie'])
         && isset($sports_facility['fields']['inslibellevoie'])
         && isset($sports_facility['fields']['insarrondissement'])
         && isset($sports_facility['fields']['actcode'])
@@ -235,6 +245,7 @@ foreach($sports_facilities_json as $sports_facility) {
         $id_arrondissement = $request->fetch(PDO::FETCH_ASSOC);
 
         $request = $pdo->prepare('INSERT INTO sports_facility(
+        id,
         practice_level,
         handicap_access_mobility_sport_area,
         handicap_access_sensory_sport_area,
@@ -246,9 +257,8 @@ foreach($sports_facilities_json as $sports_facility) {
         facility_name,
         address_number,
         address_street,
-        id_sports_practice,
-        id_sports_facility_type,
         id_arrondissement) VALUES (
+        :id,
         :practice_level,
         :mobility_sports_area,
         :sensory_sports_area,
@@ -260,10 +270,9 @@ foreach($sports_facilities_json as $sports_facility) {
         :facility_name,
         :address_number,
         :street_name,
-        :sport_practice_id,
-        :facility_type_id,
         :arrondissement_id)');
 
+        $request->bindParam(':id', $sports_facility['fields']['equipementid']);
         $request->bindParam(':practice_level', $practice_level);
         $request->bindParam(':mobility_sports_area', $handicap_access_mobility_sports_area);
         $request->bindParam(':sensory_sports_area', $handicap_access_sensory_sports_area);
@@ -275,26 +284,10 @@ foreach($sports_facilities_json as $sports_facility) {
         $request->bindParam(':facility_name', $facility_name);
         $request->bindParam(':address_number', $address_number);
         $request->bindParam(':street_name', $sports_facility['fields']['inslibellevoie']);
-        $request->bindParam(':sport_practice_id', $sports_facility['fields']['actcode']);
-        $request->bindParam(':facility_type_id', $facility_type_code);
         $request->bindParam(':arrondissement_id', $id_arrondissement['id']);
         $request->execute();
     }
 }
-
-
-
-
-// ------------------------------ sports_family --------------------------------------------------- //
-
-// table with all the sports families (ball sports, swimming sports....)
-
-foreach($sports_families_json as $sports_family) {
-    $request = $pdo->prepare('INSERT INTO sports_family(sports_family_name) VALUES (:name)');
-    $request->bindParam(':name', $sports_family['sport']);
-    $request->execute();
-}
-
 
 
 
@@ -314,7 +307,10 @@ foreach ($olympics_json as $olympic_event) {
     $request = $pdo->prepare('SELECT id FROM arrondissement WHERE insee_code = :insee');
     $request->bindParam(':insee', $olympic_event['arrondissementInsee']);
     $request->execute();
-    $id_arrondissement = $request->fetch(PDO::FETCH_ASSOC);
+    $result = $request->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) $id_arrondissement = $result;
+    else $id_arrondissement = null;
 
     foreach($olympic_event['dates'] as $date) {
         $request = $pdo->prepare('INSERT INTO olympic_event(event_name, event_place, date, id_sports_practice, id_arrondissement)
@@ -333,6 +329,82 @@ foreach ($olympics_json as $olympic_event) {
     }
 }
 
+// --------------- facility_type_association ----------------------------------- //
+
+$request = $pdo->prepare('SELECT id FROM sports_facility_type');
+$request->execute();
+$results = $request->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($results as $facility_type) {
+    $associations = [];
+
+    foreach ($sports_facilities_json as $sports_facility) {
+         // check if is in db
+        $request = $pdo->prepare('SELECT id FROM sports_facility WHERE id = :id');
+        $request->bindParam(':id', $sports_facility['fields']['equipementid']);
+        $request->execute();
+        $is_in_db = $request->fetch(PDO::FETCH_ASSOC);
+
+        if ($is_in_db && $facility_type['id'] === $sports_facility['fields']['equipementtypecode'] && !in_array(['type_id' => $facility_type['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
+            array_push($associations, [
+                'type_id' => $facility_type['id'],
+                'facility_id' => $sports_facility['fields']['equipementid']
+            ]);
+        }
+    }
+
+    foreach($associations as $association) {
+        $request = $pdo->prepare('INSERT INTO facility_type_association(id_facility_type, id_sports_facility)
+        VALUES (
+        :facility_type_id,
+        :facility_id)');
+        $request->bindParam(':facility_type_id', $association['type_id']);
+        $request->bindParam(':facility_id', $association['facility_id']);
+        $request->execute();
+    }
+}
+
+
+
+
+
+
+
+
+// --------------- facility_practice_association ----------------------------------- //
+
+$request = $pdo->prepare('SELECT id FROM sports_practice');
+$request->execute();
+$results = $request->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($results as $practice) {
+    $associations = [];
+
+    foreach ($sports_facilities_json as $sports_facility) {
+         // check if is in db
+        $request = $pdo->prepare('SELECT id FROM sports_facility WHERE id = :id');
+        $request->bindParam(':id', $sports_facility['fields']['equipementid']);
+        $request->execute();
+        $is_in_db = $request->fetch(PDO::FETCH_ASSOC);
+
+        if ($is_in_db && $practice['id'] === $sports_facility['fields']['actcode'] && !in_array(['type_id' => $practice['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
+            array_push($associations, [
+                'practice_id' => $practice['id'],
+                'facility_id' => $sports_facility['fields']['equipementid']
+            ]);
+        }
+    }
+
+    foreach($associations as $association) {
+        $request = $pdo->prepare('INSERT INTO facility_practice_association(id_sports_practice, id_sports_facility)
+        VALUES (
+        :practice_id,
+        :facility_id)');
+        $request->bindParam(':practice_id', $association['practice_id']);
+        $request->bindParam(':facility_id', $association['facility_id']);
+        $request->execute();
+    }
+}
 
 
 // --------------- sports_family_practice_association ----------------------------------- //
@@ -353,6 +425,8 @@ foreach($sports_families_json as $sport) {
         $practice_name = shorten_string($practice_name, "(");
         $practice_name = shorten_string($practice_name, ",");
         $practice_name = trim($practice_name);
+        $practice_name = str_replace(' - ', '-', $practice_name);
+
 
         $request = $pdo->prepare('SELECT id from sports_practice WHERE practice = :practice');
         $request->bindParam(':practice', $practice_name);
