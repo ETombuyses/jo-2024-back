@@ -16,13 +16,13 @@ CREATE TABLE sports_practice(
 
 
 #------------------------------------------------------------
-# Table: sports_facility_type
+# Table: facility_type
 #------------------------------------------------------------
 
-CREATE TABLE sports_facility_type(
+CREATE TABLE facility_type(
         id   Int  Auto_increment  NOT NULL ,
         type Text NOT NULL
-	,CONSTRAINT sports_facility_type_PK PRIMARY KEY (id)
+	,CONSTRAINT facility_type_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 
@@ -115,7 +115,7 @@ CREATE TABLE facility_type_association(
         id_sports_facility Int NOT NULL
 	,CONSTRAINT facility_type_association_PK PRIMARY KEY (id_facility_type,id_sports_facility)
 
-	,CONSTRAINT facility_type_association_sports_facility_type_FK FOREIGN KEY (id_facility_type) REFERENCES sports_facility_type(id)
+	,CONSTRAINT facility_type_association_facility_type_FK FOREIGN KEY (id_facility_type) REFERENCES facility_type(id)
 	,CONSTRAINT facility_type_association_sports_facility0_FK FOREIGN KEY (id_sports_facility) REFERENCES sports_facility(id)
 )ENGINE=InnoDB;
 

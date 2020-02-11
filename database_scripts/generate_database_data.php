@@ -15,7 +15,7 @@ $pdo  = new PDO(
 
 // -------- DATABASE TABLES ----------------
 // sports_practice
-// sports_facility_type
+// facility_type
 // sports_family
 // arrondissement
 // sports_facility
@@ -135,11 +135,11 @@ foreach ($olympics_json as $olympic_event) {
    }
 }
 
-//------------------- sports_facility_type ---------------------------------------------------- //
+//------------------- facility_type ---------------------------------------------------- //
 
-$sports_facility_types = [];
+$facility_types = [];
 
-// fill the $sports_facility_types array with one occurence of each sports facility type
+// fill the $facility_types array with one occurence of each sports facility type
 foreach($sports_facilities_json as $sports_facility) {
 
     if (isset($sports_facility['fields']['equipementtypecode'])) {
@@ -147,8 +147,8 @@ foreach($sports_facilities_json as $sports_facility) {
         $facility_type_shortened_name = shorten_string($sports_facility['fields']['equipementtypelib'], "/");
         $facility_type_shortened_name = trim($facility_type_shortened_name);
 
-        if (!in_array( ['id' => $sports_facility['fields']['equipementtypecode'], 'type'=> $facility_type_shortened_name] , $sports_facility_types )) {
-            array_push($sports_facility_types, [
+        if (!in_array( ['id' => $sports_facility['fields']['equipementtypecode'], 'type'=> $facility_type_shortened_name] , $facility_types )) {
+            array_push($facility_types, [
                 'id'=> $sports_facility['fields']['equipementtypecode'],
                 'type'=> $facility_type_shortened_name
             ]);
@@ -157,8 +157,8 @@ foreach($sports_facilities_json as $sports_facility) {
 }
 
 
-foreach($sports_facility_types as $type) {
-    $request = $pdo->prepare('INSERT INTO sports_facility_type(id, type) VALUES (:id, :type)');
+foreach($facility_types as $type) {
+    $request = $pdo->prepare('INSERT INTO facility_type(id, type) VALUES (:id, :type)');
     $request->bindParam(':id', $type['id']);
     $request->bindParam(':type', $type['type']);
     $request->execute();
@@ -331,7 +331,7 @@ foreach ($olympics_json as $olympic_event) {
 
 // --------------- facility_type_association ----------------------------------- //
 
-$request = $pdo->prepare('SELECT id FROM sports_facility_type');
+$request = $pdo->prepare('SELECT id FROM facility_type');
 $request->execute();
 $results = $request->fetchAll(PDO::FETCH_ASSOC);
 
@@ -377,6 +377,8 @@ $request = $pdo->prepare('SELECT id FROM sports_practice');
 $request->execute();
 $results = $request->fetchAll(PDO::FETCH_ASSOC);
 
+// id ok 
+
 foreach ($results as $practice) {
     $associations = [];
 
@@ -387,13 +389,16 @@ foreach ($results as $practice) {
         $request->execute();
         $is_in_db = $request->fetch(PDO::FETCH_ASSOC);
 
-        if ($is_in_db && $practice['id'] === $sports_facility['fields']['actcode'] && !in_array(['type_id' => $practice['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
+        // is in db ok
+
+        if ($is_in_db && (int)$practice['id'] === (int)$sports_facility['fields']['actcode'] && !in_array(['practice_id' => $practice['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
             array_push($associations, [
                 'practice_id' => $practice['id'],
                 'facility_id' => $sports_facility['fields']['equipementid']
             ]);
         }
     }
+
 
     foreach($associations as $association) {
         $request = $pdo->prepare('INSERT INTO facility_practice_association(id_sports_practice, id_sports_facility)
