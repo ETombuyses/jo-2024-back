@@ -1,7 +1,6 @@
 #------------------------------------------------------------
-#        Script MySQL.
+#        Script MySQL Including Database Creation.
 #------------------------------------------------------------
-
 
 #------------------------------------------------------------
 # Table: sports_practice
@@ -12,17 +11,6 @@ CREATE TABLE sports_practice(
         practice   Text NOT NULL ,
         image_name Text NOT NULL
 	,CONSTRAINT sports_practice_PK PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: facility_type
-#------------------------------------------------------------
-
-CREATE TABLE facility_type(
-        id   Int  Auto_increment  NOT NULL ,
-        type Text NOT NULL
-	,CONSTRAINT facility_type_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 
@@ -56,14 +44,7 @@ CREATE TABLE arrondissement(
 
 CREATE TABLE sports_facility(
         id                                     Int  Auto_increment  NOT NULL ,
-        practice_level                         Varchar (50) ,
-        handicap_access_mobility_sport_area    Bool NOT NULL ,
-        handicap_access_sensory_sport_area     Bool NOT NULL ,
-        handicap_access_sensory_locker_room    Bool NOT NULL ,
-        handicap_access_mobility_locker_room   Bool NOT NULL ,
-        handicap_access_mobility_swimming_pool Bool NOT NULL ,
-        handicap_access_sensory_sanitary       Bool NOT NULL ,
-        handicap_access_mobility_sanitary      Bool NOT NULL ,
+        facility_type                          Text NOT NULL, 
         facility_name                          Text ,
         address_number                         Int NOT NULL ,
         address_street                         Text NOT NULL ,
@@ -98,27 +79,20 @@ CREATE TABLE olympic_event(
 
 CREATE TABLE facility_practice_association(
         id_sports_practice Int NOT NULL ,
-        id_sports_facility Int NOT NULL
+        id_sports_facility Int NOT NULL,
+        practice_level                         Varchar (50) ,
+        handicap_access_mobility_sport_area    Bool NOT NULL ,
+        handicap_access_sensory_sport_area     Bool NOT NULL ,
+        handicap_access_sensory_locker_room    Bool NOT NULL ,
+        handicap_access_mobility_locker_room   Bool NOT NULL ,
+        handicap_access_mobility_swimming_pool Bool NOT NULL ,
+        handicap_access_sensory_sanitary       Bool NOT NULL ,
+        handicap_access_mobility_sanitary      Bool NOT NULL
 	,CONSTRAINT facility_practice_association_PK PRIMARY KEY (id_sports_practice,id_sports_facility)
 
 	,CONSTRAINT facility_practice_association_sports_practice_FK FOREIGN KEY (id_sports_practice) REFERENCES sports_practice(id)
 	,CONSTRAINT facility_practice_association_sports_facility0_FK FOREIGN KEY (id_sports_facility) REFERENCES sports_facility(id)
 )ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: facility_type_association
-#------------------------------------------------------------
-
-CREATE TABLE facility_type_association(
-        id_facility_type   Int NOT NULL ,
-        id_sports_facility Int NOT NULL
-	,CONSTRAINT facility_type_association_PK PRIMARY KEY (id_facility_type,id_sports_facility)
-
-	,CONSTRAINT facility_type_association_facility_type_FK FOREIGN KEY (id_facility_type) REFERENCES facility_type(id)
-	,CONSTRAINT facility_type_association_sports_facility0_FK FOREIGN KEY (id_sports_facility) REFERENCES sports_facility(id)
-)ENGINE=InnoDB;
-
 
 #------------------------------------------------------------
 # Table: sports_family_practice_association

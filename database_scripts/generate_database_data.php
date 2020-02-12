@@ -65,8 +65,6 @@ function convert_into_boolean($source, $field, $true_statement) {
 }
 
 
-
-
 // -------------- files --------
 
 $arrondissements_json = getFileJson('arrondissements.json');
@@ -135,34 +133,7 @@ foreach ($olympics_json as $olympic_event) {
    }
 }
 
-//------------------- facility_type ---------------------------------------------------- //
 
-$facility_types = [];
-
-// fill the $facility_types array with one occurence of each sports facility type
-foreach($sports_facilities_json as $sports_facility) {
-
-    if (isset($sports_facility['fields']['equipementtypecode'])) {
-
-        $facility_type_shortened_name = shorten_string($sports_facility['fields']['equipementtypelib'], "/");
-        $facility_type_shortened_name = trim($facility_type_shortened_name);
-
-        if (!in_array( ['id' => $sports_facility['fields']['equipementtypecode'], 'type'=> $facility_type_shortened_name] , $facility_types )) {
-            array_push($facility_types, [
-                'id'=> $sports_facility['fields']['equipementtypecode'],
-                'type'=> $facility_type_shortened_name
-            ]);
-        }
-    }
-}
-
-
-foreach($facility_types as $type) {
-    $request = $pdo->prepare('INSERT INTO facility_type(id, type) VALUES (:id, :type)');
-    $request->bindParam(':id', $type['id']);
-    $request->bindParam(':type', $type['type']);
-    $request->execute();
-}
 
 
 // ------------------------------ sports_family --------------------------------------------------- //
@@ -217,27 +188,11 @@ foreach($sports_facilities_json as $sports_facility) {
         && isset($sports_facility['fields']['equipementtypecode'])
         && isset($sports_facility['fields']['insarrondissement'])
     ) {
-        $handicap_access_mobility_sports_area = convert_into_boolean($sports_facility['fields'], 'equacceshandimaire', 'Oui');
-        $handicap_access_sensory_sports_area = convert_into_boolean($sports_facility['fields'], 'equacceshandisaire', 'Oui');
-        $handicap_access_sensory_locker_room = convert_into_boolean($sports_facility['fields'], 'equacceshandisvestiaire', 'Oui');
-        $handicap_access_mobility_locker_room = convert_into_boolean($sports_facility['fields'], 'equacceshandimvestiaire', 'Oui');
-        $handicap_access_mobility_sanitary = convert_into_boolean($sports_facility['fields'], 'equacceshandimsanispo', 'Oui');
-        $handicap_access_sensory_sanitary = convert_into_boolean($sports_facility['fields'], 'equacceshandissanispo', 'Oui');
-        $handicap_access_mobility_pool = convert_into_boolean($sports_facility['fields'], 'equnatimhandi', 0);
-
-        // practice level renaming
-        if (isset($sports_facility['fields']['actnivlib']) && ($sports_facility['fields']['actnivlib'] === 'Compétition nationale' || $sports_facility['fields']['actnivlib'] === 'Compétition départementale' || $sports_facility['fields']['actnivlib'] === 'Compétition internationale')) {
-            $practice_level = 'Compétition';
-        } else if (isset($sports_facility['fields']['actnivlib']) && $sports_facility['fields']['actnivlib'] === 'Loisir - Entretien - Remise en forme') {
-            $practice_level = 'Loisir';
-        } else if (!isset($sports_facility['fields']['actnivlib'])){
-            $practice_level = '';
-        }
-
+       
         $facility_name = isset($sports_facility['fields']['insnom']) ? $sports_facility['fields']['insnom'] : '';
-        $facility_type_code = (int)$sports_facility['fields']['equipementtypecode'];
         $address_number = (int)$sports_facility['fields']['insnovoie'];
 
+        
         // corresponding arrondissement id
         $request = $pdo->prepare('SELECT id FROM arrondissement WHERE insee_code = :insee');
         $request->bindParam(':insee', $sports_facility['fields']['insarrondissement']);
@@ -246,44 +201,23 @@ foreach($sports_facilities_json as $sports_facility) {
 
         $request = $pdo->prepare('INSERT INTO sports_facility(
         id,
-        practice_level,
-        handicap_access_mobility_sport_area,
-        handicap_access_sensory_sport_area,
-        handicap_access_sensory_locker_room,
-        handicap_access_mobility_locker_room,
-        handicap_access_mobility_swimming_pool,
-        handicap_access_sensory_sanitary,
-        handicap_access_mobility_sanitary,
         facility_name,
         address_number,
         address_street,
+        facility_type,
         id_arrondissement) VALUES (
         :id,
-        :practice_level,
-        :mobility_sports_area,
-        :sensory_sports_area,
-        :sensory_locker_room,
-        :mobility_locker_room,
-        :mobility_pool,
-        :sensory_sanitary,
-        :mobility_sanitary,
         :facility_name,
         :address_number,
         :street_name,
+        :type,
         :arrondissement_id)');
 
         $request->bindParam(':id', $sports_facility['fields']['equipementid']);
-        $request->bindParam(':practice_level', $practice_level);
-        $request->bindParam(':mobility_sports_area', $handicap_access_mobility_sports_area);
-        $request->bindParam(':sensory_sports_area', $handicap_access_sensory_sports_area);
-        $request->bindParam(':sensory_locker_room', $handicap_access_sensory_locker_room);
-        $request->bindParam(':mobility_locker_room', $handicap_access_mobility_locker_room);
-        $request->bindParam(':mobility_pool', $handicap_access_mobility_pool);
-        $request->bindParam(':sensory_sanitary', $handicap_access_sensory_sanitary);
-        $request->bindParam(':mobility_sanitary', $handicap_access_mobility_sanitary);
         $request->bindParam(':facility_name', $facility_name);
         $request->bindParam(':address_number', $address_number);
         $request->bindParam(':street_name', $sports_facility['fields']['inslibellevoie']);
+        $request->bindParam(':type', $sports_facility['fields']['equipementtypelib']);
         $request->bindParam(':arrondissement_id', $id_arrondissement['id']);
         $request->execute();
     }
@@ -329,47 +263,6 @@ foreach ($olympics_json as $olympic_event) {
     }
 }
 
-// --------------- facility_type_association ----------------------------------- //
-
-$request = $pdo->prepare('SELECT id FROM facility_type');
-$request->execute();
-$results = $request->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($results as $facility_type) {
-    $associations = [];
-
-    foreach ($sports_facilities_json as $sports_facility) {
-         // check if is in db
-        $request = $pdo->prepare('SELECT id FROM sports_facility WHERE id = :id');
-        $request->bindParam(':id', $sports_facility['fields']['equipementid']);
-        $request->execute();
-        $is_in_db = $request->fetch(PDO::FETCH_ASSOC);
-
-        if ($is_in_db && $facility_type['id'] === $sports_facility['fields']['equipementtypecode'] && !in_array(['type_id' => $facility_type['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
-            array_push($associations, [
-                'type_id' => $facility_type['id'],
-                'facility_id' => $sports_facility['fields']['equipementid']
-            ]);
-        }
-    }
-
-    foreach($associations as $association) {
-        $request = $pdo->prepare('INSERT INTO facility_type_association(id_facility_type, id_sports_facility)
-        VALUES (
-        :facility_type_id,
-        :facility_id)');
-        $request->bindParam(':facility_type_id', $association['type_id']);
-        $request->bindParam(':facility_id', $association['facility_id']);
-        $request->execute();
-    }
-}
-
-
-
-
-
-
-
 
 // --------------- facility_practice_association ----------------------------------- //
 
@@ -377,7 +270,6 @@ $request = $pdo->prepare('SELECT id FROM sports_practice');
 $request->execute();
 $results = $request->fetchAll(PDO::FETCH_ASSOC);
 
-// id ok 
 
 foreach ($results as $practice) {
     $associations = [];
@@ -389,24 +281,71 @@ foreach ($results as $practice) {
         $request->execute();
         $is_in_db = $request->fetch(PDO::FETCH_ASSOC);
 
-        // is in db ok
+
 
         if ($is_in_db && (int)$practice['id'] === (int)$sports_facility['fields']['actcode'] && !in_array(['practice_id' => $practice['id'], 'facility_id' => $sports_facility['fields']['equipementid']], $associations)) {
+            
+            // practice level renaming
+            if (isset($sports_facility['fields']['actnivlib']) && ($sports_facility['fields']['actnivlib'] === 'Compétition régionale' || $sports_facility['fields']['actnivlib'] === 'Compétition nationale' || $sports_facility['fields']['actnivlib'] === 'Compétition départementale' || $sports_facility['fields']['actnivlib'] === 'Compétition internationale')) {
+                $practice_level = 'Compétition';
+            } else if (isset($sports_facility['fields']['actnivlib']) && $sports_facility['fields']['actnivlib'] === 'Loisir - Entretien - Remise en forme') {
+                $practice_level = 'Loisir';
+            } else if (!isset($sports_facility['fields']['actnivlib']) || $sports_facility['fields']['actnivlib'] === 'Non défini'){
+                $practice_level = null;
+            } else {
+                $practice_level = $sports_facility['fields']['actnivlib'];
+            }
+            
             array_push($associations, [
                 'practice_id' => $practice['id'],
-                'facility_id' => $sports_facility['fields']['equipementid']
+                'facility_id' => $sports_facility['fields']['equipementid'],
+                'practice_level' => $practice_level,
+                'handicap_access_mobility_sports_area' => convert_into_boolean($sports_facility['fields'], 'equacceshandimaire', 'Oui'),
+                'handicap_access_sensory_sports_area' => convert_into_boolean($sports_facility['fields'], 'equacceshandisaire', 'Oui'),
+                'handicap_access_sensory_locker_room' => convert_into_boolean($sports_facility['fields'], 'equacceshandisvestiaire', 'Oui'),
+                'handicap_access_mobility_locker_room' => convert_into_boolean($sports_facility['fields'], 'equacceshandimvestiaire', 'Oui'),
+                'handicap_access_mobility_sanitary' => convert_into_boolean($sports_facility['fields'], 'equacceshandimsanispo', 'Oui'),
+                'handicap_access_sensory_sanitary' => convert_into_boolean($sports_facility['fields'], 'equacceshandissanispo', 'Oui'),
+                'handicap_access_mobility_pool' => convert_into_boolean($sports_facility['fields'], 'equnatimhandi', 0)
             ]);
         }
     }
 
-
     foreach($associations as $association) {
-        $request = $pdo->prepare('INSERT INTO facility_practice_association(id_sports_practice, id_sports_facility)
+        $request = $pdo->prepare('INSERT INTO facility_practice_association(
+        id_sports_practice, 
+        id_sports_facility,
+        practice_level,
+        handicap_access_mobility_sport_area,
+        handicap_access_sensory_sport_area,
+        handicap_access_sensory_locker_room,
+        handicap_access_mobility_locker_room,
+        handicap_access_mobility_sanitary,
+        handicap_access_sensory_sanitary,
+        handicap_access_mobility_swimming_pool
+        )
         VALUES (
         :practice_id,
-        :facility_id)');
+        :facility_id,
+        :practice_level,
+        :handicap_access_mobility_sports_area,
+        :handicap_access_sensory_sports_area,
+        :handicap_access_sensory_locker_room,
+        :handicap_access_mobility_locker_room,
+        :handicap_access_mobility_sanitary,
+        :handicap_access_sensory_sanitary,
+        :handicap_access_mobility_pool
+        )');
         $request->bindParam(':practice_id', $association['practice_id']);
         $request->bindParam(':facility_id', $association['facility_id']);
+        $request->bindParam(':practice_level', $association['practice_level']);
+        $request->bindParam(':handicap_access_mobility_sports_area', $association['handicap_access_mobility_sports_area']);
+        $request->bindParam(':handicap_access_sensory_sports_area', $association['handicap_access_sensory_sports_area']);
+        $request->bindParam(':handicap_access_sensory_locker_room', $association['handicap_access_sensory_locker_room']);
+        $request->bindParam(':handicap_access_mobility_locker_room', $association['handicap_access_mobility_locker_room']);
+        $request->bindParam(':handicap_access_mobility_sanitary', $association['handicap_access_mobility_sanitary']);
+        $request->bindParam(':handicap_access_sensory_sanitary', $association['handicap_access_sensory_sanitary']);
+        $request->bindParam(':handicap_access_mobility_pool', $association['handicap_access_mobility_pool']);
         $request->execute();
     }
 }
