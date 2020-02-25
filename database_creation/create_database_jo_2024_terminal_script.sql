@@ -3,7 +3,7 @@
 #------------------------------------------------------------
 
 DROP DATABASE IF EXISTS jo_2024;
-CREATE DATABASE jo_2024;
+CREATE DATABASE jo_2024 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE jo_2024;
 
 #------------------------------------------------------------

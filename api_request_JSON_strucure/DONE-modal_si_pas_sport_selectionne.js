@@ -1,15 +1,37 @@
-[
-  {
-    name: 'Tennis',
-    image: 'tennis',
-    etablissementAmount: 2
-  },
-  {
-    name: 'Foot-Ball',
-    image: 'foot-ball',
-    etablissementAmount: 90
-  },
-]
+// TODO: ajouter filtre par arrondissement
+
+let f = {
+  joSports: [
+    {
+      idPractce: 2,
+      name: 'Tennis',
+      image: 'tennis',
+      etablissementAmount: 2
+    },
+    {
+      name: 'Foot-Ball',
+      image: 'foot-ball',
+      etablissementAmount: 90
+    },
+  ],
+  otherFamilies: [
+    {
+      name: 'Tennis',
+      image: 'tennis',
+      etablissementAmount: 30,
+    },
+    {
+      name: 'Baseball',
+      image: 'baseball',
+      etablissementAmount: 3,
+    },
+    {
+      name: 'Golf',
+      image: 'golf',
+      etablissementAmount: 29,
+    }
+  ]
+}
 
 
 
@@ -17,10 +39,31 @@
 
 // parametres : 
 
-[{date: '2024-23-02', handicapMobility: true, handicapSensory: false, practiceLevel: 'Compétition'}]
+[{date: '2024-23-02', arrondissement: 2, handicapMobility: true, handicapSensory: false, practiceLevel: 'Compétition'}]
 
 
 /* ---------------------- SQL request + traitement ------------------ */
+
+16 cas à traiter :
+- sans filtre
+- level
+- sensory
+- mobility
+- level + mobilité
+- level + sensory
+- level + sensory + mobility
+- mobility + sensory
+- arrondissement
+- arrondissement + mobility
+- arrondissement + sensory
+- arrondissement + level
+- arrondissement + mobility + level
+- arrondissement + mobility + sensory
+- arrondissement + sensory + level
+
+- arrondissement + mobility + sensory + level
+
+
 
 ////// en faire plusieurs différentes pour chaque partie du résultat :
 
@@ -32,7 +75,9 @@ INNER JOIN olympic_event o ON p.id = o.id_sports_practice
 WHERE o.date = '2024-07-26'
 
 --> faire un array des id pratice
---> pour cahque id (suite des filtres)
+--> pour chaque id (suite des filtres)
+
+
 
 // count nombre etab si : filtre level 
 SELECT COUNT(f.id) FROM sports_facility f
@@ -66,7 +111,9 @@ WHERE p.id = 5201 AND a.practice_level = 'Entrainement' AND (a.handicap_access_s
 SELECT COUNT(f.id) FROM sports_facility f
 INNER JOIN facility_practice_association a ON f.id = a.id_sports_facility
 INNER JOIN sports_practice p ON p.id = a.id_sports_practice 
-WHERE p.id = 5201 AND a.practice_level = 'Entrainement' AND ((a.handicap_access_mobility_sport_area = 1 OR a.handicap_access_mobility_locker_room  = 1 OR a.handicap_access_mobility_swimming_pool = 1 OR a.handicap_access_mobility_sanitary = 1) AND (a.handicap_access_sensory_sport_area = 1 OR a.handicap_access_sensory_locker_room  = 1 OR a.handicap_access_sensory_sanitary = 1))
+WHERE p.id = 5201 AND ((a.handicap_access_mobility_sport_area = 1 OR a.handicap_access_mobility_locker_room  = 1 OR a.handicap_access_mobility_swimming_pool = 1 OR a.handicap_access_mobility_sanitary = 1) AND (a.handicap_access_sensory_sport_area = 1 OR a.handicap_access_sensory_locker_room = 1 OR a.handicap_access_sensory_sanitary = 1))
 
 
 /* status */
+
+doooone !!!

@@ -1,30 +1,21 @@
 [
-  {
-    date: '2024-08-07',
-    practices: [
-      {
-        id: 1,
-        name: 'tennis', 
-        icon: 'tennis'
-      }
-    ]
+  {  
+    id: 1,
+    name: 'tennis', 
+    icon: 'tennis'
   },
   {
-    date: '2024-08-15',
-    practices: [
-      {
-        id: 4,
-        name: 'basket ball', 
-        icon: 'basket-ball'
-      },
-      {
-        id: 9,
-        name: 'natation', 
-        icon: 'natation'
-      }
-    ]
+    id: 4,
+    name: 'basket ball', 
+    icon: 'basket-ball'
+  },
+  {
+    id: 9,
+    name: 'natation', 
+    icon: 'natation'
   }
 ]
+// pour chaque date envoyer la liste des épreuves
 
 explications: 
 
